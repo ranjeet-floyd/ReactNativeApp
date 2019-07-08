@@ -25,11 +25,12 @@ export default class App extends Component {
 
 
   state = {
-    players =[],
+    players: [],
     selectedPlayer: null
   };
 
   selectPlayer = (player) => {
+    console.log("selectPlayer", player);
     this.setState({
       selectedPlayer: player
     })
@@ -47,25 +48,27 @@ export default class App extends Component {
 
   handleModelClose = () => {
     this.setState({
-      selectedPlayer = null
+      selectedPlayer: null
     });
   }
 
   handleModelDelete = (player) => {
-
+    console.log('handleModelDelete', player);
+    console.log('handleModelDelete players', this.state.players);
     const updatePlayerList = this.state.players
       .filter(p => p.id != player.id);
-
-
+    console.log('updatePlayerList', updatePlayerList);
     this.setState(
       {
-        PlayerList: updatePlayerList
+        players: updatePlayerList,
+        selectedPlayer: null
       }
     );
   }
 
 
   render() {
+
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
@@ -76,10 +79,11 @@ export default class App extends Component {
         <PlayerList players={this.state.players} onSelect={this.selectPlayer}></PlayerList>
 
         <Modal visible={this.state.selectedPlayer != null} onRequestClose={this.handleModelClose} >
+
           {this.state.selectedPlayer ?
-            <View>
-              <Image source={this.selectedPlayer.uri} style={{ height: 50, width: 50 }}></Image>
-              <Text>{this.selectedPlayer.name}</Text>
+            <View style={styles.container}>
+              <Image source={this.state.selectedPlayer.image} style={{ height: 50, width: 50 }}></Image>
+              <Text>{this.state.selectedPlayer.playerName}</Text>
               <Button title="close" onPress={this.handleModelClose}></Button>
               <Button title="delete" onPress={() => this.handleModelDelete(this.state.selectedPlayer)}></Button>
             </View> : null}

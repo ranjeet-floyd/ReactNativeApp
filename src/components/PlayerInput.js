@@ -13,7 +13,7 @@ const PlayerInput = (props) => {
     function handleSave() {
         console.log(name);
         const player = {
-            id: Math.random * 10,
+            id: Math.random() * 10,
             playerName: name,
             image: imageSource
         }
@@ -46,7 +46,7 @@ const PlayerInput = (props) => {
     return (
         <View style={styles.container}>
             <Text style={{ fontSize: 20 }}>Player Input</Text>
-            <TextInput placeholder="Player name" value={name} onChangeText={handleChange(text)}></TextInput>
+            <TextInput placeholder="Player name" value={name} onChangeText={handleChange}></TextInput>
             <Button title="Select Image" onPress={handleSelectImage}></Button>
             <Image style={styles.image} source={imageSource}></Image>
             <Button title="Save" onPress={handleSave}></Button>

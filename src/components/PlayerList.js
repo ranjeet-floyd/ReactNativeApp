@@ -9,6 +9,7 @@ const PlayerList = (props) => {
 
     function generateList() {
         return props.players.map((p) => {
+            console.log(p);
             return (
                 // <TouchableHighlight key={p.id.toString()} onPress={() => onItemPress(p)}>
                 <TouchableHighlight key={p.id.toString()} onPress={onItemPress.bind(this, p)}>
@@ -24,7 +25,7 @@ const PlayerList = (props) => {
     return (
 
         <View style={{ width: "100%" }}>
-            <Text>List of Players</Text>
+            <Text style={{ color: 'red', fontSize: 20 }}>List of Players</Text>
             <ScrollView>
                 {props.players.length > 0 ? generateList() : <Text>No Players</Text>}
             </ScrollView>
